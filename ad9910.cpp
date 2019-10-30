@@ -217,7 +217,7 @@ void DDS_Init(void)
 	 
 	  
 	 
-	 
+	 /******************* External Oscillator TCXO 10 MHz ***********************************************/ 
 	 
 	 HAL_GPIO_WritePin(DDS_SPI_CS_GPIO_PORT, DDS_SPI_CS_PIN, GPIO_PIN_RESET); 	 
 	 strBuffer[0] = CFR3_addr;
@@ -230,6 +230,19 @@ void DDS_Init(void)
 	 
 	 DDS_UPDATE();
 	
+	
+	/******************* External Oscillator 1 GHz ***********************************************/ 
+   
+   //HAL_GPIO_WritePin(DDS_SPI_CS_GPIO_PORT, DDS_SPI_CS_PIN, GPIO_PIN_RESET);    
+   //strBuffer[0] = CFR3_addr;
+   //strBuffer[1] = DRV0_REFCLK_OUT_High_output_current;//
+   //strBuffer[2] = 0;
+   //strBuffer[3] = REFCLK_input_divider_ResetB | REFCLK_input_divider_bypass; // | PLL_enable; // //REFCLK_input_divider_bypass; //
+   //strBuffer[4] = 0; // SYSCLK= REF_CLK * N
+   //HAL_SPI_Transmit(&hspi1, (uint8_t*)strBuffer, 5, 1000);
+   //HAL_GPIO_WritePin(DDS_SPI_CS_GPIO_PORT, DDS_SPI_CS_PIN, GPIO_PIN_SET);
+   
+   //DDS_UPDATE();
 	
 	
 		HAL_GPIO_WritePin(DDS_SPI_CS_GPIO_PORT, DDS_SPI_CS_PIN, GPIO_PIN_RESET); 	 
