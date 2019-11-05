@@ -30,22 +30,22 @@ void setup()
 {
   Serial.begin(115200);
   DDS_Init();
-  M=133;
-  K=300;
+  M=300;
+  K=000;
   H=0;
-  A=5;
+  A=0;
   MenuPos=0;
-  modeButton.debounceTime   = 20;   // Debounce timer in ms
-  modeButton.multiclickTime = 30;  // Time limit for multi clicks
-  modeButton.longClickTime  = 2000; // time until "held-down clicks" register
+  modeButton.debounceTime   = 75;   // Debounce timer in ms
+  modeButton.multiclickTime = 1;  // Time limit for multi clicks
+  modeButton.longClickTime  = 1000; // time until "held-down clicks" register
 
-  upButton.debounceTime   = 20;   // Debounce timer in ms
-  upButton.multiclickTime = 20;  // Time limit for multi clicks
-  upButton.longClickTime  = 10000; // time until "held-down clicks" register
+  upButton.debounceTime   = 75;   // Debounce timer in ms*/
+  upButton.multiclickTime = 1;  // Time limit for multi clicks*/
+  upButton.longClickTime  = 1000; // time until "held-down clicks" register*/
 
-  downButton.debounceTime   = 20;   // Debounce timer in ms
-  downButton.multiclickTime = 20;  // Time limit for multi clicks
-  downButton.longClickTime  = 10000; // time until "held-down clicks" register
+  downButton.debounceTime   = 70;   // Debounce timer in ms
+  downButton.multiclickTime = 1;  // Time limit for multi clicks
+  downButton.longClickTime  = 1000; // time until "held-down clicks" register
 
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
   display.clearDisplay();
@@ -116,6 +116,9 @@ void loop ()
 	
 //	DDS_RAM(&strFM[0], 4);
 
+  int functionUpButton=0;
+  int functionDownButton=0;
+
   char strBuffer1[10];
  
   strBuffer1[0]=0x30;
@@ -129,7 +132,10 @@ void loop ()
     upButton.Update();
     downButton.Update();
 
-    if (upButton.clicks > 0)
+    if (upButton.clicks != 0) functionUpButton = upButton.clicks;
+
+    if ((functionUpButton == 1 && upButton.depressed == false) ||
+        (functionUpButton == -1 && upButton.depressed == true))
     {
       //if (MenuPos==0) {M=Inc(M); if (M>HIGH_FREQ_LIMIT/1000000) M=420;}
       if (MenuPos==0) {if (Check (M+1, K, H)) M=Inc(M);}
@@ -141,9 +147,14 @@ void loop ()
         if (A>85) A=85;
       }
       UpdateDisplay();
-    }
+    } 
+    if (upButton.depressed == false) functionUpButton=0;
 
-    if (downButton.clicks > 0)
+
+    if (downButton.clicks != 0) functionDownButton = downButton.clicks;
+
+    if ((functionDownButton == 1 && downButton.depressed == false) ||
+        (functionDownButton == -1 && downButton.depressed == true))
     {
       //if (MenuPos==0) {M=Dec(M); if (M>HIGH_FREQ_LIMIT/1000000) M=420;}
       if (MenuPos==0) {if (Check(M-1, K, H)) M=Dec(M);}
@@ -156,6 +167,7 @@ void loop ()
       }
       UpdateDisplay();
     }
+    if (downButton.depressed == false) functionDownButton=0;
 
     if (modeButton.clicks > 0)
     {
@@ -163,6 +175,7 @@ void loop ()
       if (MenuPos>3) MenuPos=0;
       UpdateDisplay();
     }
+    
    Amplitude_dB = A;
     Freq_Out(M*1000000L + K*1000L + H, Amplitude_dB*-1);
 

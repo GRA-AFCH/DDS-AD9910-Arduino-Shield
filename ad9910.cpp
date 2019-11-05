@@ -215,10 +215,24 @@ void DDS_Init(void)
 	 
 	 DDS_UPDATE();
 	 
-	  
+   /******************* Internal Oscillator XO 25 MHz with PLL 1GHz***********************************************/ 
+  
+   HAL_GPIO_WritePin(DDS_SPI_CS_GPIO_PORT, DDS_SPI_CS_PIN, GPIO_PIN_RESET);    
+   strBuffer[0] = CFR3_addr;
+   strBuffer[1] = VCO5;// | DRV0_REFCLK_OUT_High_output_current;
+   strBuffer[2] = Icp287uA;
+   strBuffer[3] = REFCLK_input_divider_ResetB | PLL_enable; // REFCLK_input_divider_bypass; //
+   strBuffer[4] = N40; // SYSCLK= REF_CLK * N
+   HAL_SPI_Transmit(&hspi1, (uint8_t*)strBuffer, 5, 1000);
+   HAL_GPIO_WritePin(DDS_SPI_CS_GPIO_PORT, DDS_SPI_CS_PIN, GPIO_PIN_SET);
+   
+   DDS_UPDATE();
+  
+ 
+    
 	 
 	 /******************* External Oscillator TCXO 10 MHz ***********************************************/ 
-	 
+	/* 
 	 HAL_GPIO_WritePin(DDS_SPI_CS_GPIO_PORT, DDS_SPI_CS_PIN, GPIO_PIN_RESET); 	 
 	 strBuffer[0] = CFR3_addr;
 	 strBuffer[1] = VCO5;// | DRV0_REFCLK_OUT_High_output_current;
@@ -229,7 +243,7 @@ void DDS_Init(void)
 	 HAL_GPIO_WritePin(DDS_SPI_CS_GPIO_PORT, DDS_SPI_CS_PIN, GPIO_PIN_SET);
 	 
 	 DDS_UPDATE();
-	
+*/	
 	
 	/******************* External Oscillator 1 GHz ***********************************************/ 
    

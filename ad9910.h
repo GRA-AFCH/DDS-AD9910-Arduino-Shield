@@ -264,6 +264,7 @@ pin indicates new data for transmission. In continuous mode, this pin remains hi
 
 // REFCLK Multiplier, if PLL enable, SYSCLK= REF_CLK * N
 #define N25 														50 // 
+#define N40                             80 // 
 #define N50 														100 //
 #define N100 														200 // 
 
