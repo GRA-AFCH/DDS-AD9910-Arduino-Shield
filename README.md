@@ -20,7 +20,7 @@ Key Benefits:
 *Easy to connect OLED display
 *Control buttons for control via the program menu.
 
-# Switching a clock source made by next components:
+# Switching a clock source is made by next components:
 <pre>
 |-------------------------------|-----------------------------------|-----------------|
 |      Clock source             |            Capacitors             |    Resistors    |
