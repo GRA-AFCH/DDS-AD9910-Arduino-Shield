@@ -23,7 +23,7 @@ Key Benefits:
 # Switching a clock source made by next components:
 <pre>
 |-------------------------------|-----------------------------------|-----------------|
-|      Clock source             |      Capacitors                   |    Resistors    |
+|      Clock source             |            Capacitors             |    Resistors    |
 |   (only one at a time)        | C20  |  C22  |  C18,C19 | C14,C17 |  XTAL | REF_CLK |
 |-------------------------------------------------------------------------------------|
 | XO - Crystal Oscillator (Z1)  |  -   |   -   |    V     |    X    |   V   |    X    |
