@@ -32,3 +32,5 @@ Key Benefits:
 | EGEN - External Generator     |  X   |   X   |    X     |    V    |   X   |    V    |
 |-------------------------------------------------------------------------------------|
 </pre>
+
+Where V means that the component must be installed (soldered), and X - means that the component must be removed
