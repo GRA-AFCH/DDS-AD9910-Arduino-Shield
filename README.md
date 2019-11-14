@@ -21,7 +21,7 @@ Key Benefits:
 *Control buttons for control via the program menu.
 
 # Switching a clock source made by next components:
-
+<pre>
 |-------------------------------|-----------------------------------|-----------------|
 |      Clock source             |      Capacitors                   |    Resistors    |
 |   (only one at a time)        | C20  |  C22  |  C18,C19 | C14,C17 |  XTAL | REF_CLK |
@@ -31,3 +31,4 @@ Key Benefits:
 | OCXO - Oscillator 0.1ppm (Z3) |  X   |   V   |    X     |    V    |   X   |    V    |
 | EGEN - External Generator     |  X   |   X   |    X     |    V    |   X   |    V    |
 |-------------------------------------------------------------------------------------|
+</pre>
